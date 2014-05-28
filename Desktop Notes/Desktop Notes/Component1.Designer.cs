@@ -40,6 +40,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.start_windows = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.help_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.context1.SuspendLayout();
             // 
             // notifyIcon1
@@ -48,7 +49,7 @@
             this.notifyIcon1.BalloonTipTitle = "Desktop Notes";
             this.notifyIcon1.ContextMenuStrip = this.context1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Text = "Desktop Notes";
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             // 
             // context1
@@ -61,9 +62,10 @@
             this.hideall_menu,
             this.toolStripSeparator1,
             this.start_windows,
+            this.help_menu,
             this.exit_menu});
             this.context1.Name = "contextMenuStrip1";
-            this.context1.Size = new System.Drawing.Size(182, 132);
+            this.context1.Size = new System.Drawing.Size(182, 154);
             this.context1.Opening += new System.ComponentModel.CancelEventHandler(this.context1_Opening);
             // 
             // toolStripSeparator3
@@ -111,6 +113,12 @@
             this.exit_menu.Name = "exit_menu";
             this.exit_menu.Size = new System.Drawing.Size(181, 22);
             this.exit_menu.Text = "Exit";
+            // 
+            // help_menu
+            // 
+            this.help_menu.Name = "help_menu";
+            this.help_menu.Size = new System.Drawing.Size(181, 22);
+            this.help_menu.Text = "Help";
             this.context1.ResumeLayout(false);
 
         }
@@ -127,6 +135,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem start_windows;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem help_menu;
 
     }
 }

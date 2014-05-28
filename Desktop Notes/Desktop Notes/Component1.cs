@@ -21,6 +21,7 @@ namespace Desktop_Notes
             this.showall_menu.Click += showall_menu_Click;
             this.hideall_menu.Click += hideall_menu_Click;
             this.newnote_menu.Click += newnote_menu_Click;
+            this.help_menu.Click += help_menu_Click;
             this.exit_menu.Click += exit_menu_Click;
             this.start_windows.Checked = REGISTRY.StartWithWindows;
             this.start_windows.CheckedChanged += start_windows_CheckedChanged;
@@ -61,6 +62,12 @@ namespace Desktop_Notes
                 f.Show();
                 SetForegroundWindow(f.Handle.ToInt32());
             }
+        }
+
+        void help_menu_Click(object sender, EventArgs e)
+        {
+            HelpForm hp = new HelpForm();
+            hp.ShowDialog();
         }
 
         void exit_menu_Click(object sender, System.EventArgs e)
