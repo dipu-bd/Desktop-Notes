@@ -12,9 +12,8 @@ namespace Desktop_Notes
         public Size FormSize { get; set; }
         public string data { get; set; }
         public Font font { get; set; }
-        public Color textcolor { get; set; }
-        public Color backcolor { get; set; }
-        public Color topbarcolor { get; set; }
+        public int theme { get; set; }
+        public double opacity { get; set; }
 
         public FormData() { }
         public FormData(MainForm form)
@@ -23,9 +22,35 @@ namespace Desktop_Notes
             FormSize = form.Size;
             data = form.notebox1.Text;
             font = form.notebox1.Font;
-            textcolor = form.notebox1.ForeColor;
-            backcolor = form.notebox1.BackColor;
-            topbarcolor = form.TopBar.BackColor;
+            theme = form.CurrentTheme;
+            opacity = form.Opacity;
         }
     }
-}
+
+    public class Theme
+    {
+        public string Name { get; set; }
+        public Color TextColor { get; set; }
+        public Color BackColor { get; set; }
+        public Color TopBarColor { get; set; }
+
+        public Theme() { }
+        public Theme(string name, Color text, Color back, Color top)
+        {
+            Name = name;
+            TextColor = text;
+            BackColor = back;
+            TopBarColor = top;
+        }
+
+        public static Theme DefaultTheme()
+        {
+            Theme th = new Theme();
+            th.Name = "Default";
+            th.TextColor = Color.Black;
+            th.BackColor = Color.FromArgb(255, 255, 200);
+            th.TopBarColor = Color.FromArgb(245, 240, 180);
+            return th;
+        }
+    }        
+} 

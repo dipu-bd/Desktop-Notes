@@ -55,19 +55,16 @@ namespace Desktop_Notes
             {
                 object obj = START_KEY.GetValue("Desktop Notes", null);
                 if (obj == null) return false;
-
-                try
-                {
-                    START_KEY.DeleteValue("Desktop Notes", false);
-                    return true;
-                }
-                catch { return false; }
+                return true;
             }
             set
             {
                 if (value) { START_KEY.SetValue("Desktop Notes", Application.ExecutablePath); }
-                else try { START_KEY.DeleteValue("Desktop Notes", false); }
+                else
+                {
+                    try { START_KEY.DeleteValue("Desktop Notes", false); }
                     catch { }
+                }
             }
         }
     }

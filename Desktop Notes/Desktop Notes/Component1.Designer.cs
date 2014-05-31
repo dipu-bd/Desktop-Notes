@@ -39,8 +39,8 @@
             this.hideall_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.start_windows = new System.Windows.Forms.ToolStripMenuItem();
-            this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.help_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.context1.SuspendLayout();
             // 
             // notifyIcon1
@@ -51,6 +51,7 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Desktop Notes";
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // context1
             // 
@@ -108,17 +109,17 @@
             this.start_windows.Size = new System.Drawing.Size(181, 22);
             this.start_windows.Text = "Open with Windows";
             // 
-            // exit_menu
-            // 
-            this.exit_menu.Name = "exit_menu";
-            this.exit_menu.Size = new System.Drawing.Size(181, 22);
-            this.exit_menu.Text = "Exit";
-            // 
             // help_menu
             // 
             this.help_menu.Name = "help_menu";
             this.help_menu.Size = new System.Drawing.Size(181, 22);
             this.help_menu.Text = "Help";
+            // 
+            // exit_menu
+            // 
+            this.exit_menu.Name = "exit_menu";
+            this.exit_menu.Size = new System.Drawing.Size(181, 22);
+            this.exit_menu.Text = "Exit";
             this.context1.ResumeLayout(false);
 
         }

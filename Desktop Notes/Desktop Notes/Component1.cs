@@ -116,5 +116,13 @@ namespace Desktop_Notes
             }
         }
 
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                showall_menu.PerformClick();
+            }
+        }
+
     }
 }

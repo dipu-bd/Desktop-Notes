@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Desktop_Notes
 {
@@ -15,14 +16,43 @@ namespace Desktop_Notes
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            EmptySlots = new Queue<int>();
+            Themes = new List<Theme>();
+            LoadThemes();
+
             components = new Component1();
             components.SetIconVisible(true);
             ShowAllNotes();
-            
+
             Application.Run();
         }
-        
+
+        public static int CUR_ID = 1;
+        public static Queue<int> EmptySlots;
+        public static List<Theme> Themes;
         public static Component1 components;
+
+        public static void LoadThemes()
+        {
+            List<List<string>> dat =
+                Newtonsoft.Json.JsonConvert.DeserializeObject<List<List<string>>>
+                (Desktop_Notes.Properties.Resources.Themes);
+
+            foreach (List<string> d in dat)
+            {
+                Theme th = new Theme();
+                th.Name = d[0];
+
+                List<List<int>> tdat =
+                    Newtonsoft.Json.JsonConvert.DeserializeObject<List<List<int>>>(d[1]);
+
+                th.TextColor = Color.FromArgb(tdat[0][0], tdat[0][1], tdat[0][2]);
+                th.BackColor = Color.FromArgb(tdat[1][0], tdat[1][1], tdat[1][2]);
+                th.TopBarColor = Color.FromArgb(tdat[2][0], tdat[2][1], tdat[2][2]);
+
+                Themes.Add(th);
+            }
+        }
 
         public static void ShowAllNotes()
         {
@@ -35,16 +65,18 @@ namespace Desktop_Notes
 
             REGISTRY.DeleteAll();
 
-            foreach (FormData dat in data) AddNewNote(dat);           
+            foreach (FormData dat in data) AddNewNote(dat);
             if (CUR_ID == 1) AddNewNote();
         }
 
-        public static int CUR_ID = 1;
         public static void AddNewNote(FormData dat = null)
         {
-            MainForm form = new MainForm(CUR_ID, dat);            
+            int id = CUR_ID;
+            if (EmptySlots.Count == 0) ++CUR_ID;
+            else id = EmptySlots.Dequeue();
+
+            MainForm form = new MainForm(id, dat);
             form.Show();
-            ++CUR_ID;
         }
 
         public static void SaveAllOnExit()

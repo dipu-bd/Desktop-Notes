@@ -27,3 +27,4 @@ E:\Projects\GitHub\Desktop-Notes\Desktop Notes\Desktop Notes\obj\Debug\Desktop_N
 E:\Projects\GitHub\Desktop-Notes\Desktop Notes\Desktop Notes\obj\Debug\Desktop Notes.csproj.GenerateResource.Cache
 E:\Projects\GitHub\Desktop-Notes\Desktop Notes\Desktop Notes\bin\Debug\AlphaBlendTextBox.dll
 E:\Projects\GitHub\Desktop-Notes\Desktop Notes\Desktop Notes\bin\Debug\AlphaBlendTextBox.pdb
+E:\Projects\GitHub\Desktop-Notes\Desktop Notes\Desktop Notes\bin\Debug\Desktop Notes.exe.config
