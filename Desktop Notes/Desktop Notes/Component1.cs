@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Text;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Desktop_Notes
 {
     public partial class Component1 : Component
     {
-
         [DllImport("User32.dll")]
-        public static extern Int32 SetForegroundWindow(int hWnd);
+        public static extern Int32 SetForegroundWindow(IntPtr hWnd);
 
         public Component1()
         {
@@ -26,7 +22,7 @@ namespace Desktop_Notes
             this.start_windows.Checked = REGISTRY.StartWithWindows;
             this.start_windows.CheckedChanged += start_windows_CheckedChanged;
         }
-        
+
         public Component1(IContainer container)
         {
             container.Add(this);
@@ -44,23 +40,36 @@ namespace Desktop_Notes
         {
             notifyIcon1.Visible = isVisible;
         }
+        
+        public static NoteManager noteManager;
+        void noteManager_form_Click(object sender, System.EventArgs e)
+        {
+            if (noteManager == null || noteManager.IsDisposed)
+                noteManager = new NoteManager();
+            noteManager.Show();
+        }
 
         void newnote_menu_Click(object sender, System.EventArgs e)
         {
             Program.AddNewNote();
-        }
+        }        
 
         void hideall_menu_Click(object sender, System.EventArgs e)
         {
-            foreach (Form f in Application.OpenForms) f.Hide();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.GetType() != typeof(MainForm)) continue;
+                f.Hide();
+            }
         }
 
         void showall_menu_Click(object sender, System.EventArgs e)
         {
             foreach (Form f in Application.OpenForms)
             {
+                if (f.GetType() != typeof(MainForm)) continue;
                 f.Show();
-                SetForegroundWindow(f.Handle.ToInt32());
+                SetForegroundWindow(f.Handle);
             }
         }
 
@@ -73,22 +82,29 @@ namespace Desktop_Notes
         void exit_menu_Click(object sender, System.EventArgs e)
         {
             Application.Exit();
-        } 
+        }
 
         private void context1_Opening(object sender, CancelEventArgs e)
         {
-            while(context1.Items[0].Tag != null) 
-                context1.Items.RemoveAt(0);            
-            
+            while (context1.Items[0].Tag != null)
+                context1.Items.RemoveAt(0);
+
             foreach (Form f in Application.OpenForms)
             {
-                if (!f.Visible)
+                if (f.GetType() != typeof(MainForm)) continue;
+                ToolStripMenuItem menu = new ToolStripMenuItem();
+                menu.Text = ((MainForm)f).Title;
+                menu.Tag = f;
+                menu.Click += menu_Click;
+                context1.Items.Insert(0, menu);
+                if (f.Visible)
                 {
-                    ToolStripMenuItem menu = new ToolStripMenuItem();
-                    menu.Text = ((MainForm)f).Title;
-                    menu.Tag = f;
-                    menu.Click += menu_Click;
-                    context1.Items.Insert(0, menu);                    
+                    menu.Image = Properties.Resources.hide;
+                }
+                else
+                {
+                    menu.Image = Properties.Resources.show;
+                    menu.Text = "[" + menu.Text + "]";
                 }
             }
         }
@@ -99,7 +115,7 @@ namespace Desktop_Notes
             {
                 ToolStripMenuItem menu = (ToolStripMenuItem)sender;
                 MainForm f = (MainForm)menu.Tag;
-                f.Show();
+                f.Visible = !f.Visible;
                 context1.Items.Remove(menu);
             }
             catch { }
@@ -111,7 +127,8 @@ namespace Desktop_Notes
             {
                 foreach (Form f in Application.OpenForms)
                 {
-                    if (f.Visible) SetForegroundWindow(f.Handle.ToInt32());
+                    if (f.GetType() != typeof(MainForm)) continue;
+                    if (f.Visible) SetForegroundWindow(f.Handle);
                 }
             }
         }

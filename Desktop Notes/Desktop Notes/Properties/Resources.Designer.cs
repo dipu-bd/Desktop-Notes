@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Desktop_Notes.Properties {
-    using System;
-    
-    
+namespace Desktop_Notes.Properties
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -73,6 +73,16 @@ namespace Desktop_Notes.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap background {
+            get {
+                object obj = ResourceManager.GetObject("background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
@@ -101,7 +111,38 @@ namespace Desktop_Notes.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default # 0,0,0 # .
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap show {
+            get {
+                object obj = ResourceManager.GetObject("show", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [
+        ///	[
+        ///		&quot;Default&quot;, 
+        ///		&quot;[[0, 0, 0], [255, 255, 200], [245, 240, 180]]&quot;
+        ///	], 
+        ///	[
+        ///		&quot;Blue&quot;, 
+        ///		&quot;[[0, 0, 0], [215, 245, 250], [200, 236, 248]]&quot;
+        ///	], 
+        ///	[
+        ///		&quot;Green&quot;, 
+        ///		&quot;[[0, 0, 0], [208, 253, 202], [198, 248, 195]]&quot;
+        ///	],  
+        ///	[
+        ///		&quot;White&quot;, 
+        ///		&quot;[[0, 0, 0], [253, 253, 253], [245, 245, 245]]&quot;
+        ///	], 
+        ///	[
+        ///		&quot;Yellow&quot;, 
+        ///		&quot;[[0, 0, 0], [253, 253, 202], [248, 247, 182]]&quot;
+        ///	]
+        ///].
         /// </summary>
         internal static string Themes {
             get {

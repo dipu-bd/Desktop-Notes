@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Desktop_Notes
 {
-    static class Program
+    public static class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -31,6 +31,7 @@ namespace Desktop_Notes
         public static Queue<int> EmptySlots;
         public static List<Theme> Themes;
         public static Component1 components;
+        public static event EventHandler newNoteAddedEvent;
 
         public static void LoadThemes()
         {
@@ -54,6 +55,15 @@ namespace Desktop_Notes
             }
         }
 
+        public static void AddNewNote(FormData dat = null)
+        {
+            int id = CUR_ID;
+            if (EmptySlots.Count == 0) ++CUR_ID;
+            else id = EmptySlots.Dequeue();
+            new MainForm(id, dat);
+            if (newNoteAddedEvent != null) newNoteAddedEvent(null, EventArgs.Empty);
+        }
+
         public static void ShowAllNotes()
         {
             List<FormData> data = new List<FormData>();
@@ -64,24 +74,17 @@ namespace Desktop_Notes
             }
 
             REGISTRY.DeleteAll();
-
             foreach (FormData dat in data) AddNewNote(dat);
             if (CUR_ID == 1) AddNewNote();
         }
 
-        public static void AddNewNote(FormData dat = null)
-        {
-            int id = CUR_ID;
-            if (EmptySlots.Count == 0) ++CUR_ID;
-            else id = EmptySlots.Dequeue();
-
-            MainForm form = new MainForm(id, dat);
-            form.Show();
-        }
-
         public static void SaveAllOnExit()
         {
-            foreach (MainForm f in Application.OpenForms) f.Save();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.GetType() != typeof(MainForm)) continue;
+                ((MainForm)f).Save();
+            }
         }
     }
 }
