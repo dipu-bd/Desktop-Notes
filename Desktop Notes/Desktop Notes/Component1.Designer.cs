@@ -41,6 +41,7 @@
             this.start_windows = new System.Windows.Forms.ToolStripMenuItem();
             this.help_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.noteManager_form = new System.Windows.Forms.ToolStripMenuItem();
             this.context1.SuspendLayout();
             // 
             // notifyIcon1
@@ -59,6 +60,7 @@
             this.toolStripSeparator3,
             this.newnote_menu,
             this.toolStripSeparator2,
+            this.noteManager_form,
             this.showall_menu,
             this.hideall_menu,
             this.toolStripSeparator1,
@@ -66,7 +68,7 @@
             this.help_menu,
             this.exit_menu});
             this.context1.Name = "contextMenuStrip1";
-            this.context1.Size = new System.Drawing.Size(182, 154);
+            this.context1.Size = new System.Drawing.Size(182, 176);
             this.context1.Opening += new System.ComponentModel.CancelEventHandler(this.context1_Opening);
             // 
             // toolStripSeparator3
@@ -120,10 +122,17 @@
             this.exit_menu.Name = "exit_menu";
             this.exit_menu.Size = new System.Drawing.Size(181, 22);
             this.exit_menu.Text = "Exit";
+            // 
+            // noteManager_form
+            // 
+            this.noteManager_form.Name = "noteManager_form";
+            this.noteManager_form.Size = new System.Drawing.Size(181, 22);
+            this.noteManager_form.Text = "Note Manager";
+            this.noteManager_form.Click += noteManager_form_Click;
             this.context1.ResumeLayout(false);
 
         }
-        
+
         #endregion
 
         public System.Windows.Forms.NotifyIcon notifyIcon1;
@@ -137,6 +146,7 @@
         private System.Windows.Forms.ToolStripMenuItem start_windows;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem help_menu;
+        private System.Windows.Forms.ToolStripMenuItem noteManager_form;
 
     }
 }

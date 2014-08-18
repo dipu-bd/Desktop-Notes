@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace Desktop_Notes
 {
@@ -14,6 +10,9 @@ namespace Desktop_Notes
         public Font font { get; set; }
         public int theme { get; set; }
         public double opacity { get; set; }
+        public string title { get;set;}
+        public bool hidden { get; set; }
+        public bool topmost { get; set; }
 
         public FormData() { }
         public FormData(MainForm form)
@@ -24,6 +23,9 @@ namespace Desktop_Notes
             font = form.notebox1.Font;
             theme = form.CurrentTheme;
             opacity = form.Opacity;
+            hidden = !form.Visible;
+            title = form.Title;
+            topmost = form.TopMost;
         }
     }
 

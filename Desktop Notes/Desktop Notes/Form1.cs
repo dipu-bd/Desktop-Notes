@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -11,11 +7,57 @@ namespace Desktop_Notes
 {
     public partial class MainForm : Form
     {
+        public MainForm(int id, FormData dat = null)
+        {
+            FORM_ID = id;
+            InitializeComponent();
+
+            loadThemes();
+            this.AllowTransparency = true;
+            this.DoubleBuffered = true;
+            this.StartPosition = FormStartPosition.Manual;
+
+            LoadData(dat);
+        }
+
+        private void LoadData(FormData dat = null)
+        {
+            //load defaults
+            this.Opacity = 0.95;
+            this.StartPosition = FormStartPosition.WindowsDefaultLocation;
+            if (string.IsNullOrEmpty(Title))
+            {
+                Title = string.Format("Note {0:##}", FORM_ID);
+            }
+            if (Program.Themes.Count > 1)
+            {
+                int seed = (int)DateTime.Now.Ticks & ((1 << 25) - 1);
+                Random rand = new Random(seed);
+                CurrentTheme = rand.Next(Program.Themes.Count);
+            }
+            this.Show();
+            
+            //load others
+            if (dat == null) return;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = dat.Location;
+            this.Size = dat.FormSize;
+            this.notebox1.Font = dat.font;
+            this.notebox1.Text = dat.data;
+            this.Opacity = dat.opacity;
+            this.Title = dat.title;
+            this.CurrentTheme = dat.theme;
+            if (dat.hidden) this.Hide();
+        }
+
+        //
+        // Properties and Variables
+        //
         public int FORM_ID { get; set; }
         public string Title
         {
             get { return titlebar.Text; }
-            set { titlebar.Text = value; }
+            set { titlebar.Text = value; Save(); }
         }
         private int _theme = 0;
         public int CurrentTheme
@@ -25,83 +67,23 @@ namespace Desktop_Notes
             {
                 _theme = value;
 
-                if (_theme > Program.Themes.Count)
+                if (_theme >= Program.Themes.Count)
                     _theme = Program.Themes.Count - 1;
+                if (_theme < 0) _theme = 0;
 
                 Theme th = Program.Themes[_theme];
-                this.TopBar.BackColor = th.TopBarColor;
                 this.notebox1.BackColor = th.BackColor;
                 this.notebox1.ForeColor = th.TextColor;
-            }
-        }        
-                
-        public MainForm(int id, FormData dat = null)
-        {
-            FORM_ID = id;
-            InitializeComponent();
+                this.TopBar.BackColor = th.TopBarColor;
+                this.titlebar.BackColor = th.TopBarColor;
+                this.addButton.BackColor = th.TopBarColor;
+                this.deleteButton.BackColor = th.TopBarColor;
+                this.hideButton.BackColor = th.TopBarColor;
 
-            this.AllowTransparency = true;
-            this.DoubleBuffered = true;
-
-            loadThemes();
-            if (dat != null) SetData(dat);
-            Title = string.Format("Note {0:##}", FORM_ID);             
-        }
-
-        //
-        // Themes
-        //
-        void loadThemes()
-        {
-            themeContext.Items.Clear();
-            for(int i = 0; i < Program.Themes.Count; ++i)
-            {
-                ToolStripMenuItem ti = new ToolStripMenuItem();
-                ti.Text = Program.Themes[i].Name;
-                ti.Tag = i;
-                ti.Click += ti_Click;
-                themeContext.Items.Add(ti);
+                Save();
             }
         }
 
-        void ti_Click(object sender, EventArgs e)
-        {
-            CurrentTheme = (int)((ToolStripItem)sender).Tag;
-            Save();
-        }
-
-        //
-        // save and load data
-        //
-        public bool Save()
-        {
-            try
-            {
-                if (this.notebox1.Text.Length == 0) return false;
-                REGISTRY.SetData(FORM_ID.ToString(), new FormData(this));
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        private void property_Changed(object sender, EventArgs e)
-        {
-            Save();
-        }
-
-        void SetData(FormData dat)
-        {
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = dat.Location;
-            this.Size = dat.FormSize;
-            this.CurrentTheme = dat.theme;
-            this.notebox1.Font = dat.font;
-            this.notebox1.Text = dat.data;
-            this.Opacity = dat.opacity;
-            REGISTRY.SetData(FORM_ID.ToString(), dat);
-        }
 
         //
         //Drag form using Topbar
@@ -110,9 +92,9 @@ namespace Desktop_Notes
         public const int HT_CAPTION = 0x2;
 
         [DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        public static extern int SendMessage(IntPtr hWnd, long Msg, long wParam, long lParam);
         [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
+        public static extern int ReleaseCapture();
 
         private void TopBar_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -124,45 +106,109 @@ namespace Desktop_Notes
         }
 
         //
+        // save and load data
+        // 
+        public bool Save()
+        {
+            try
+            {
+                REGISTRY.SetData(FORM_ID.ToString(), new FormData(this));
+                return true;
+            }
+            catch { return false; }
+        }
+        private void property_Changed(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        //
+        // Themes
+        //
+        void loadThemes()
+        {
+            themeContext.Items.Clear();
+            for (int i = 0; i < Program.Themes.Count; ++i)
+            {
+                ToolStripMenuItem ti = new ToolStripMenuItem();
+                ti.Text = Program.Themes[i].Name;
+                ti.Tag = i;
+                ti.Click += ti_Click;
+                themeContext.Items.Add(ti);
+            }
+        }
+        void ti_Click(object sender, EventArgs e)
+        {
+            CurrentTheme = (int)((ToolStripItem)sender).Tag;
+        }
+
+        //
         // Topbar icons
         //
-        private void toolStripButton3_Click(object sender, EventArgs e)
+
+        private void themeContext_Opening(object sender, CancelEventArgs e)
+        {
+            stayOnTopToolStripMenuItem.Checked = this.TopMost;
+        }
+
+        private void cut_Click(object sender, EventArgs e)
+        {
+            notebox1.Cut();
+        }
+
+        private void copy_Click(object sender, EventArgs e)
+        {
+            notebox1.Copy();
+        }
+
+        private void paste_Click(object sender, EventArgs e)
+        {
+            notebox1.Paste();
+        }
+        private void hideNote_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
-         
-        private void add_note_Click(object sender, EventArgs e)
+
+        private void addNote_Click(object sender, EventArgs e)
         {
             Program.AddNewNote();
-        } 
-         
-        private void deleteNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        }
+        private void stayOnTopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            stayOnTopToolStripMenuItem.Checked = !stayOnTopToolStripMenuItem.Checked;
+            this.TopMost = stayOnTopToolStripMenuItem.Checked;
+            Save();
+        }
+        private void deleteNote_Click(object sender, EventArgs e)
+        {
+            sureDialog.Visible = true;
+            this.TopMost = true;
+        }
+
+        private void settings_Click(object sender, EventArgs e)
+        {
+            SettingForm setting = new SettingForm(this);
+            setting.ShowDialog();
+        }
+
+
+        //
+        // Sure Dialog
+        //
+        private void yesButton_Click(object sender, EventArgs e)
         {
             REGISTRY.Delete(FORM_ID.ToString());
             Program.EmptySlots.Enqueue(FORM_ID);
             this.Close();
         }
 
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void noButton_Click(object sender, EventArgs e)
         {
-            SettingForm setting = new SettingForm(this);
-            setting.ShowDialog();
+            sureDialog.Visible = false;
+            this.TopMost = false;
         }
 
-        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            notebox1.Cut();
-        }
-
-        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            notebox1.Copy();
-        }
-
-        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            notebox1.Paste();
-        }
 
     }
 }
