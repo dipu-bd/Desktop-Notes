@@ -37,16 +37,17 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.showall_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.hideall_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.noteManager_form = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.start_windows = new System.Windows.Forms.ToolStripMenuItem();
             this.help_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
-            this.noteManager_form = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.context1.SuspendLayout();
             // 
             // notifyIcon1
             // 
-            this.notifyIcon1.BalloonTipText = "Click here to access desktop notes.";
+            this.notifyIcon1.BalloonTipText = "Desktop Notes is here...";
             this.notifyIcon1.BalloonTipTitle = "Desktop Notes";
             this.notifyIcon1.ContextMenuStrip = this.context1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
@@ -60,15 +61,16 @@
             this.toolStripSeparator3,
             this.newnote_menu,
             this.toolStripSeparator2,
-            this.noteManager_form,
             this.showall_menu,
             this.hideall_menu,
+            this.noteManager_form,
             this.toolStripSeparator1,
-            this.start_windows,
             this.help_menu,
+            this.start_windows,
+            this.toolStripSeparator4,
             this.exit_menu});
             this.context1.Name = "contextMenuStrip1";
-            this.context1.Size = new System.Drawing.Size(182, 176);
+            this.context1.Size = new System.Drawing.Size(182, 160);
             this.context1.Opening += new System.ComponentModel.CancelEventHandler(this.context1_Opening);
             // 
             // toolStripSeparator3
@@ -78,6 +80,7 @@
             // 
             // newnote_menu
             // 
+            this.newnote_menu.Image = global::Desktop_Notes.Properties.Resources.add;
             this.newnote_menu.Name = "newnote_menu";
             this.newnote_menu.Size = new System.Drawing.Size(181, 22);
             this.newnote_menu.Text = "New Note";
@@ -99,6 +102,12 @@
             this.hideall_menu.Size = new System.Drawing.Size(181, 22);
             this.hideall_menu.Text = "Hide All";
             // 
+            // noteManager_form
+            // 
+            this.noteManager_form.Name = "noteManager_form";
+            this.noteManager_form.Size = new System.Drawing.Size(181, 22);
+            this.noteManager_form.Text = "Note Manager";
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -115,7 +124,7 @@
             // 
             this.help_menu.Name = "help_menu";
             this.help_menu.Size = new System.Drawing.Size(181, 22);
-            this.help_menu.Text = "Help";
+            this.help_menu.Text = "About";
             // 
             // exit_menu
             // 
@@ -123,12 +132,10 @@
             this.exit_menu.Size = new System.Drawing.Size(181, 22);
             this.exit_menu.Text = "Exit";
             // 
-            // noteManager_form
+            // toolStripSeparator4
             // 
-            this.noteManager_form.Name = "noteManager_form";
-            this.noteManager_form.Size = new System.Drawing.Size(181, 22);
-            this.noteManager_form.Text = "Note Manager";
-            this.noteManager_form.Click += noteManager_form_Click;
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(178, 6);
             this.context1.ResumeLayout(false);
 
         }
@@ -147,6 +154,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem help_menu;
         private System.Windows.Forms.ToolStripMenuItem noteManager_form;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 
     }
 }

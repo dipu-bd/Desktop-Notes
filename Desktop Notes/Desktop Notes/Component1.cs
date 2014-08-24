@@ -21,6 +21,7 @@ namespace Desktop_Notes
             this.exit_menu.Click += exit_menu_Click;
             this.start_windows.Checked = REGISTRY.StartWithWindows;
             this.start_windows.CheckedChanged += start_windows_CheckedChanged;
+            this.noteManager_form.Click += noteManager_form_Click;
         }
 
         public Component1(IContainer container)
@@ -36,9 +37,10 @@ namespace Desktop_Notes
         }
 
         //notify icon
-        public void SetIconVisible(bool isVisible)
+        public void SetIconVisible()
         {
-            notifyIcon1.Visible = isVisible;
+            notifyIcon1.Visible = true;
+            notifyIcon1.ShowBalloonTip(1000);
         }
         
         public static NoteManager noteManager;
@@ -95,7 +97,7 @@ namespace Desktop_Notes
                 ToolStripMenuItem menu = new ToolStripMenuItem();
                 menu.Text = ((MainForm)f).Title;
                 menu.Tag = f;
-                menu.Click += menu_Click;
+                menu.Click += showhide_Click;
                 context1.Items.Insert(0, menu);
                 if (f.Visible)
                 {
@@ -109,7 +111,7 @@ namespace Desktop_Notes
             }
         }
 
-        void menu_Click(object sender, EventArgs e)
+        void showhide_Click(object sender, EventArgs e)
         {
             try
             {

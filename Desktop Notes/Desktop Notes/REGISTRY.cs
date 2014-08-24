@@ -64,5 +64,16 @@ namespace Desktop_Notes
                 }
             }
         }
+
+        public static bool FirstRun
+        {
+            get
+            {
+                object obj = START_KEY.GetValue("First Run", null);
+                if (obj == null) return true;
+                START_KEY.SetValue("First Run", 0);
+                return false;
+            }
+        }
     }
 }

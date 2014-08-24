@@ -7,6 +7,8 @@ namespace Desktop_Notes
         public HelpForm()
         {
             InitializeComponent();
+            productName.Text = Application.ProductName;
+            versionLabel.Text = "Version " + Application.ProductVersion;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

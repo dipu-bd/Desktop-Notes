@@ -13,6 +13,7 @@ namespace Desktop_Notes
         public string title { get;set;}
         public bool hidden { get; set; }
         public bool topmost { get; set; }
+        public Theme customTheme { get; set; }
 
         public FormData() { }
         public FormData(MainForm form)
@@ -26,6 +27,7 @@ namespace Desktop_Notes
             hidden = !form.Visible;
             title = form.Title;
             topmost = form.TopMost;
+            customTheme = form.CustomTheme;
         }
     }
 

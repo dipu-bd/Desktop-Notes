@@ -40,6 +40,7 @@
             this.hideNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.stayOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themeContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +54,6 @@
             this.addButton = new System.Windows.Forms.CustomButton();
             this.hideButton = new System.Windows.Forms.CustomButton();
             this.deleteButton = new System.Windows.Forms.CustomButton();
-            this.stayOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.TopBar.SuspendLayout();
             this.sureDialog.SuspendLayout();
@@ -75,52 +75,52 @@
             this.themeToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 242);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 220);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cut_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copy_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.paste_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
             // 
             // newNoteToolStripMenuItem
             // 
             this.newNoteToolStripMenuItem.Image = global::Desktop_Notes.Properties.Resources.add;
             this.newNoteToolStripMenuItem.Name = "newNoteToolStripMenuItem";
-            this.newNoteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newNoteToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.newNoteToolStripMenuItem.Text = "New Note";
             this.newNoteToolStripMenuItem.Click += new System.EventHandler(this.addNote_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(133, 6);
             // 
             // hideNoteToolStripMenuItem
             // 
             this.hideNoteToolStripMenuItem.Image = global::Desktop_Notes.Properties.Resources.hide;
             this.hideNoteToolStripMenuItem.Name = "hideNoteToolStripMenuItem";
-            this.hideNoteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hideNoteToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.hideNoteToolStripMenuItem.Text = "Hide Note";
             this.hideNoteToolStripMenuItem.Click += new System.EventHandler(this.hideNote_Click);
             // 
@@ -128,25 +128,33 @@
             // 
             this.deleteNoteToolStripMenuItem.Image = global::Desktop_Notes.Properties.Resources.delete;
             this.deleteNoteToolStripMenuItem.Name = "deleteNoteToolStripMenuItem";
-            this.deleteNoteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteNoteToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.deleteNoteToolStripMenuItem.Text = "Delete Note";
             this.deleteNoteToolStripMenuItem.Click += new System.EventHandler(this.deleteNote_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(133, 6);
+            // 
+            // stayOnTopToolStripMenuItem
+            // 
+            this.stayOnTopToolStripMenuItem.Name = "stayOnTopToolStripMenuItem";
+            this.stayOnTopToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.stayOnTopToolStripMenuItem.Text = "Stay on top";
+            this.stayOnTopToolStripMenuItem.Click += new System.EventHandler(this.stayOnTopToolStripMenuItem_Click);
             // 
             // themeToolStripMenuItem
             // 
             this.themeToolStripMenuItem.DropDown = this.themeContext;
             this.themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            this.themeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.themeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.themeToolStripMenuItem.Text = "Theme";
             // 
             // themeContext
             // 
             this.themeContext.Name = "themeContext";
+            this.themeContext.OwnerItem = this.themeToolStripMenuItem;
             this.themeContext.Size = new System.Drawing.Size(61, 4);
             this.themeContext.Opening += new System.ComponentModel.CancelEventHandler(this.themeContext_Opening);
             // 
@@ -154,7 +162,7 @@
             // 
             this.settingsToolStripMenuItem.Image = global::Desktop_Notes.Properties.Resources.settings;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settings_Click);
             // 
@@ -267,7 +275,7 @@
             // 
             this.addButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addButton.Image = global::Desktop_Notes.Properties.Resources.add;
+            this.addButton.Image = global::Desktop_Notes.Properties.Resources.add_gray;
             this.addButton.Location = new System.Drawing.Point(1, 1);
             this.addButton.Margin = new System.Windows.Forms.Padding(1);
             this.addButton.Name = "addButton";
@@ -276,6 +284,10 @@
             this.addButton.TabStop = false;
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addNote_Click);
+            this.addButton.Enter += new System.EventHandler(this.addButton_Enter);
+            this.addButton.Leave += new System.EventHandler(this.addButton_Leave);
+            this.addButton.MouseEnter += new System.EventHandler(this.addButton_Enter);
+            this.addButton.MouseLeave += new System.EventHandler(this.addButton_Leave);
             // 
             // hideButton
             // 
@@ -283,7 +295,7 @@
             this.hideButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.hideButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.hideButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hideButton.Image = global::Desktop_Notes.Properties.Resources.hide;
+            this.hideButton.Image = global::Desktop_Notes.Properties.Resources.hide_gray;
             this.hideButton.Location = new System.Drawing.Point(145, 1);
             this.hideButton.Margin = new System.Windows.Forms.Padding(1);
             this.hideButton.Name = "hideButton";
@@ -292,12 +304,16 @@
             this.hideButton.TabStop = false;
             this.hideButton.UseVisualStyleBackColor = false;
             this.hideButton.Click += new System.EventHandler(this.hideNote_Click);
+            this.hideButton.Enter += new System.EventHandler(this.hideButton_Enter);
+            this.hideButton.Leave += new System.EventHandler(this.hideButton_Leave);
+            this.hideButton.MouseEnter += new System.EventHandler(this.hideButton_Enter);
+            this.hideButton.MouseLeave += new System.EventHandler(this.hideButton_Leave);
             // 
             // deleteButton
             // 
             this.deleteButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteButton.Image = global::Desktop_Notes.Properties.Resources.delete;
+            this.deleteButton.Image = global::Desktop_Notes.Properties.Resources.delete_gray;
             this.deleteButton.Location = new System.Drawing.Point(175, 1);
             this.deleteButton.Margin = new System.Windows.Forms.Padding(1);
             this.deleteButton.Name = "deleteButton";
@@ -306,13 +322,10 @@
             this.deleteButton.TabStop = false;
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteNote_Click);
-            // 
-            // stayOnTopToolStripMenuItem
-            // 
-            this.stayOnTopToolStripMenuItem.Name = "stayOnTopToolStripMenuItem";
-            this.stayOnTopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.stayOnTopToolStripMenuItem.Text = "Stay on top";
-            this.stayOnTopToolStripMenuItem.Click += new System.EventHandler(this.stayOnTopToolStripMenuItem_Click);
+            this.deleteButton.Enter += new System.EventHandler(this.deleteButton_Enter);
+            this.deleteButton.Leave += new System.EventHandler(this.deleteButton_Leave);
+            this.deleteButton.MouseEnter += new System.EventHandler(this.deleteButton_Enter);
+            this.deleteButton.MouseLeave += new System.EventHandler(this.deleteButton_Leave);
             // 
             // MainForm
             // 
@@ -335,6 +348,7 @@
             this.ShowInTaskbar = false;
             this.LocationChanged += new System.EventHandler(this.property_Changed);
             this.SizeChanged += new System.EventHandler(this.property_Changed);
+            this.VisibleChanged += new System.EventHandler(this.property_Changed);
             this.contextMenuStrip1.ResumeLayout(false);
             this.TopBar.ResumeLayout(false);
             this.TopBar.PerformLayout();

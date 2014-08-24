@@ -109,6 +109,7 @@
             this.text_color.TabIndex = 5;
             this.text_color.Text = "...";
             this.text_color.UseVisualStyleBackColor = true;
+            this.text_color.Click += new System.EventHandler(this.text_color_Click);
             // 
             // back_color
             // 
@@ -121,6 +122,7 @@
             this.back_color.TabIndex = 4;
             this.back_color.Text = "...";
             this.back_color.UseVisualStyleBackColor = true;
+            this.back_color.Click += new System.EventHandler(this.back_color_Click);
             // 
             // label1
             // 
@@ -172,6 +174,7 @@
             this.topbar_color.TabIndex = 3;
             this.topbar_color.Text = "...";
             this.topbar_color.UseVisualStyleBackColor = true;
+            this.topbar_color.Click += new System.EventHandler(this.topbar_color_Click);
             // 
             // label8
             // 

@@ -35,10 +35,7 @@ namespace Desktop_Notes
 
         void load_settings()
         {
-            Theme th = Program.Themes[form.CurrentTheme];
-            topbar_color.BackColor = th.TopBarColor;
-            back_color.BackColor = th.BackColor;
-            text_color.BackColor = th.TextColor;
+            load_theme();
 
             current_font.Font = form.notebox1.Font;
             current_font.Text = form.notebox1.Font.FontFamily.Name;
@@ -46,6 +43,15 @@ namespace Desktop_Notes
 
             opacity_val.Value = (decimal)form.Opacity;
             theme_sel.SelectedIndex = form.CurrentTheme;
+        }
+
+        void load_theme()
+        {
+            Theme th = Program.Themes[form.CurrentTheme];
+            if (th.Name == "Custom") th = form.CustomTheme;
+            topbar_color.BackColor = th.TopBarColor;
+            back_color.BackColor = th.BackColor;
+            text_color.BackColor = th.TextColor;
         }
 
         void load_defaults()
@@ -71,7 +77,11 @@ namespace Desktop_Notes
         //theme changed
         private void theme_sel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try { form.CurrentTheme = (int)theme_sel.SelectedIndex; }
+            try
+            {
+                form.CurrentTheme = (int)theme_sel.SelectedIndex;
+                load_theme();
+            }
             catch { }
         }
 
@@ -108,6 +118,67 @@ namespace Desktop_Notes
             form.Opacity = (double)opacity_val.Value;
             int v = (int)(opacity_val.Value * 100);
             if (v >= trackBar1.Minimum && v != trackBar1.Value) trackBar1.Value = v;
+        }
+
+        //change custom themes
+        private void topbar_color_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.Color = topbar_color.BackColor;
+            if(cd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                form.CustomTheme.TopBarColor = cd.Color;
+                if (theme_sel.SelectedIndex != 0)
+                {
+                    theme_sel.SelectedIndex = 0;
+                }
+                else
+                {
+                    form.ReloadTheme();
+                    form.Save();
+                    load_theme();
+                }
+            }
+        }
+
+        private void back_color_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.Color = back_color.BackColor;
+            if (cd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                form.CustomTheme.BackColor = cd.Color;
+                if (theme_sel.SelectedIndex != 0)
+                {
+                    theme_sel.SelectedIndex = 0;
+                }
+                else
+                {
+                    form.ReloadTheme();
+                    form.Save();
+                    load_theme();
+                }
+            }
+        }
+
+        private void text_color_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.Color = text_color.BackColor;
+            if (cd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                form.CustomTheme.TextColor = cd.Color;
+                if (theme_sel.SelectedIndex != 0)
+                {
+                    theme_sel.SelectedIndex = 0;
+                }
+                else
+                {
+                    form.ReloadTheme();
+                    form.Save();
+                    load_theme();
+                }
+            }           
         }
     }
 }

@@ -19,12 +19,12 @@ namespace Desktop_Notes
             EmptySlots = new Queue<int>();
             Themes = new List<Theme>();
             LoadThemes();
-
             components = new Component1();
-            components.SetIconVisible(true);
+            components.SetIconVisible();
             ShowAllNotes();
 
             Application.Run();
+            if (REGISTRY.FirstRun) REGISTRY.StartWithWindows = true;
         }
 
         public static int CUR_ID = 1;

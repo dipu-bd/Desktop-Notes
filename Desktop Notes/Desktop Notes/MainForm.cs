@@ -8,9 +8,10 @@ namespace Desktop_Notes
     public partial class MainForm : Form
     {
         public MainForm(int id, FormData dat = null)
-        {
+        {            
             FORM_ID = id;
             InitializeComponent();
+            CustomTheme = new Theme();
 
             loadThemes();
             this.AllowTransparency = true;
@@ -39,6 +40,8 @@ namespace Desktop_Notes
             
             //load others
             if (dat == null) return;
+            if (dat.hidden) this.Hide();
+            this.SuspendLayout();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = dat.Location;
             this.Size = dat.FormSize;
@@ -46,8 +49,9 @@ namespace Desktop_Notes
             this.notebox1.Text = dat.data;
             this.Opacity = dat.opacity;
             this.Title = dat.title;
+            if (dat.customTheme != null) this.CustomTheme = dat.customTheme;
             this.CurrentTheme = dat.theme;
-            if (dat.hidden) this.Hide();
+            this.ResumeLayout(true);
         }
 
         //
@@ -71,20 +75,26 @@ namespace Desktop_Notes
                     _theme = Program.Themes.Count - 1;
                 if (_theme < 0) _theme = 0;
 
-                Theme th = Program.Themes[_theme];
-                this.notebox1.BackColor = th.BackColor;
-                this.notebox1.ForeColor = th.TextColor;
-                this.TopBar.BackColor = th.TopBarColor;
-                this.titlebar.BackColor = th.TopBarColor;
-                this.addButton.BackColor = th.TopBarColor;
-                this.deleteButton.BackColor = th.TopBarColor;
-                this.hideButton.BackColor = th.TopBarColor;
-
+                ReloadTheme();
                 Save();
             }
         }
 
+        public void ReloadTheme()
+        {
+            Theme th = Program.Themes[_theme];
+            if (th.Name == "Custom") th = CustomTheme;
+            this.notebox1.BackColor = th.BackColor;
+            this.notebox1.ForeColor = th.TextColor;
+            this.TopBar.BackColor = th.TopBarColor;
+            this.titlebar.BackColor = th.TopBarColor;
+            this.addButton.BackColor = th.TopBarColor;
+            this.deleteButton.BackColor = th.TopBarColor;
+            this.hideButton.BackColor = th.TopBarColor;
+        }
 
+        public Theme CustomTheme { get; set; }
+        
         //
         //Drag form using Topbar
         //
@@ -172,6 +182,7 @@ namespace Desktop_Notes
 
         private void addNote_Click(object sender, EventArgs e)
         {
+            notebox1.Focus();
             Program.AddNewNote();
         }
         private void stayOnTopToolStripMenuItem_Click(object sender, EventArgs e)
@@ -208,7 +219,38 @@ namespace Desktop_Notes
             sureDialog.Visible = false;
             this.TopMost = false;
         }
+        
+        //
+        // Button Style
+        //
+        private void addButton_Enter(object sender, EventArgs e)
+        {
+            addButton.Image = Properties.Resources.add;
+        }
 
+        private void addButton_Leave(object sender, EventArgs e)
+        {
+            addButton.Image = Properties.Resources.add_gray;
+        }
 
+        private void hideButton_Enter(object sender, EventArgs e)
+        {
+            hideButton.Image = Properties.Resources.hide;
+        }
+
+        private void hideButton_Leave(object sender, EventArgs e)
+        {
+            hideButton.Image = Properties.Resources.hide_gray;
+        }
+
+        private void deleteButton_Enter(object sender, EventArgs e)
+        {
+            deleteButton.Image = Properties.Resources.delete;
+        }
+
+        private void deleteButton_Leave(object sender, EventArgs e)
+        {
+            deleteButton.Image = Properties.Resources.delete_gray;
+        }
     }
 }
