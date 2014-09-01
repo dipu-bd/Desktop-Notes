@@ -155,10 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="main.ico" />
-    <None Include="Resources\delete_gray1.png" />
-    <None Include="Resources\hide_gray.png" />
-    <None Include="Resources\delete_gray.png" />
-    <None Include="Resources\add_gray.png" />
+    <None Include="Resources\Styles.txt" />
+    <Content Include="Resources\Themes.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

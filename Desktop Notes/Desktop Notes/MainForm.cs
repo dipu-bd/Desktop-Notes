@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Desktop_Notes
@@ -12,14 +14,24 @@ namespace Desktop_Notes
             FORM_ID = id;
             InitializeComponent();
             CustomTheme = new Theme();
+            CustomStyle = new Style();
 
             loadThemes();
+            loadStyles();
             this.AllowTransparency = true;
             this.DoubleBuffered = true;
             this.StartPosition = FormStartPosition.Manual;
 
             LoadData(dat);
             this.DateTimeLabel.Text = CreationTime.ToString();
+
+            //set sure dialog
+            Bitmap image = new Bitmap(sureDialog.Width, sureDialog.Height);
+            Graphics g = Graphics.FromImage(image);
+            Brush brush = new HatchBrush(HatchStyle.OutlinedDiamond, Color.Turquoise, Color.LightBlue);
+            g.FillRectangle(brush, 0, 0, sureDialog.Width, sureDialog.Height);
+            sureDialog.BackgroundImage = image;
+            sureDialog.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         private void LoadData(FormData dat = null)
@@ -27,21 +39,23 @@ namespace Desktop_Notes
             //load defaults
             this.Opacity = 0.95;
             this.StartPosition = FormStartPosition.WindowsDefaultLocation;
+            this.CreationTime = DateTime.Now;
             if (string.IsNullOrEmpty(Title))
             {
                 Title = string.Format("Note {0:##}", FORM_ID);
             }
             if (Program.Themes.Count > 1)
             {
-                int seed = (int)DateTime.Now.Ticks & ((1 << 25) - 1);
-                Random rand = new Random(seed);
+                Random rand = new Random();
                 CurrentTheme = rand.Next(Program.Themes.Count - 1) + 1;
             }
-            CreationTime = DateTime.Now;
-
+            if (Program.Styles.Count > 1)
+            {
+                CurrentStyle = 1;
+            }
             if (dat == null)
             {
-                this.Show(); 
+                this.Show();
                 return;
             }
 
@@ -49,16 +63,17 @@ namespace Desktop_Notes
             this.SuspendLayout();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = dat.Location;
-            this.Size = dat.FormSize;
-            this.notebox1.Font = dat.font;
+            this.Size = dat.FormSize; 
             this.notebox1.Text = dat.data;
             this.Opacity = dat.opacity;
             this.Title = dat.title;
             if (dat.customTheme != null) { this.CustomTheme = dat.customTheme; }
-            if (dat.creationTime > new DateTime(2014, 1, 1)) { this.CreationTime = dat.creationTime; }
             this.CurrentTheme = dat.theme;
+            if (dat.customStyle != null) { this.CustomStyle = dat.customStyle; }
+            this.CurrentStyle = dat.currentStyle;
+            if (dat.creationTime > new DateTime(2014, 1, 1)) { this.CreationTime = dat.creationTime; }
             this.ResumeLayout(true);
-            
+
             this.Show();
             if (dat.hidden) this.Hide();
         }
@@ -73,20 +88,44 @@ namespace Desktop_Notes
             get { return titlebar.Text; }
             set { titlebar.Text = value; Save(); }
         }
+        public Theme CustomTheme { get; set; }
+        public Style CustomStyle { get; set; }
+
         private int _theme = 0;
         public int CurrentTheme
         {
             get { return _theme; }
             set
             {
-                _theme = value;
+                if (value >= Program.Themes.Count)
+                    value = Program.Themes.Count - 1;
+                if (value < 0) value = 0;
 
-                if (_theme >= Program.Themes.Count)
-                    _theme = Program.Themes.Count - 1;
-                if (_theme < 0) _theme = 0;
-
+                if (_theme != value)
+                {
+                    _theme = value;
+                    Save();
+                }
                 ReloadTheme();
-                Save();
+            }
+        }
+
+        private int _style = 0;
+        public int CurrentStyle
+        {
+            get { return _style; }
+            set
+            {
+                if (value >= Program.Styles.Count)
+                    value = Program.Styles.Count - 1;
+                if (value < 0) value = 0;
+                
+                if (_style != value)
+                {
+                    _style = value;
+                    Save();
+                }
+                ReloadStyle();
             }
         }
 
@@ -104,8 +143,12 @@ namespace Desktop_Notes
             this.bottomPanel.BackColor = th.TopBarColor;
             this.BackColor = th.BackColor;
         }
-
-        public Theme CustomTheme { get; set; }
+        public void ReloadStyle()
+        {
+            Style th = Program.Styles[_style];
+            if (th.Name == "Custom") th = CustomStyle;
+            this.notebox1.Font = th.GetFont();
+        }
 
         //
         //Drag form using Topbar
@@ -139,13 +182,14 @@ namespace Desktop_Notes
             }
             catch { return false; }
         }
+
         private void property_Changed(object sender, EventArgs e)
         {
             Save();
         }
 
         //
-        // Themes
+        // Themes and Styles
         //
         void loadThemes()
         {
@@ -155,54 +199,86 @@ namespace Desktop_Notes
                 ToolStripMenuItem ti = new ToolStripMenuItem();
                 ti.Text = Program.Themes[i].Name;
                 ti.Tag = i;
-                ti.Click += ti_Click;
+                ti.Click += delegate(object sender, EventArgs e)
+                {
+                    CurrentTheme = (int)((ToolStripItem)sender).Tag;
+                };
                 themeContext.Items.Add(ti);
             }
         }
-        void ti_Click(object sender, EventArgs e)
+
+        void loadStyles()
         {
-            CurrentTheme = (int)((ToolStripItem)sender).Tag;
+            styleContext.Items.Clear();
+            for (int i = 0; i < Program.Styles.Count; ++i)
+            {
+                ToolStripMenuItem ti = new ToolStripMenuItem();
+                ti.Text = Program.Styles[i].Name;
+                ti.Tag = i;
+                ti.Click += delegate(object sender, EventArgs e)
+                {
+                    CurrentStyle = (int)((ToolStripItem)sender).Tag;
+                };
+                styleContext.Items.Add(ti);
+            }
         }
 
         //
         // Topbar icons
         //
-
-        private void themeContext_Opening(object sender, CancelEventArgs e)
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
+            bool edit = (sender == notebox1);
+            cutToolStripMenuItem.Visible = edit;
+            copyToolStripMenuItem.Visible = edit;
+            pasteToolStripMenuItem.Visible = edit;
+            toolStripSeparator1.Visible = edit;
             stayOnTopToolStripMenuItem.Checked = this.TopMost;
         }
+        private void themeContext_Opening(object sender, CancelEventArgs e)
+        {
+            foreach(ToolStripMenuItem tmi in themeContext.Items)
+            {
+                tmi.Checked = ((int)tmi.Tag == CurrentTheme);
+            }
+        }
+
+        private void styleContext_Opening(object sender, CancelEventArgs e)
+        {
+            foreach (ToolStripMenuItem tmi in styleContext.Items)
+            {
+                tmi.Checked = ((int)tmi.Tag == CurrentStyle);
+            }
+        } 
 
         private void cut_Click(object sender, EventArgs e)
         {
             notebox1.Cut();
         }
-
         private void copy_Click(object sender, EventArgs e)
         {
             notebox1.Copy();
         }
-
         private void paste_Click(object sender, EventArgs e)
         {
             notebox1.Paste();
-        }
-        private void hideNote_Click(object sender, EventArgs e)
-        {
-            notebox1.Focus();
-            this.Hide();
-        }
-
-        private void addNote_Click(object sender, EventArgs e)
-        {
-            notebox1.Focus();
-            Program.AddNewNote();
         }
         private void stayOnTopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             stayOnTopToolStripMenuItem.Checked = !stayOnTopToolStripMenuItem.Checked;
             this.TopMost = stayOnTopToolStripMenuItem.Checked;
             Save();
+        }
+
+        private void hideNote_Click(object sender, EventArgs e)
+        {
+            notebox1.Focus();
+            this.Hide();
+        }
+        private void addNote_Click(object sender, EventArgs e)
+        {
+            notebox1.Focus();
+            Program.AddNewNote();
         }
         private void deleteNote_Click(object sender, EventArgs e)
         {
@@ -269,6 +345,7 @@ namespace Desktop_Notes
         {
             deleteButton.Image = Properties.Resources.delete_gray;
         }
+
 
     }
 }

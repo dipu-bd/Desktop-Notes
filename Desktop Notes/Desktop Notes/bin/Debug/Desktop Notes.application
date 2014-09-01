@@ -4,14 +4,14 @@
   <description asmv2:publisher="Sudipto Chandra" asmv2:product="Desktop Notes" asmv2:supportUrl="https://sourceforge.net/p/desktop-notes" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" />
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Desktop Notes.exe.manifest" size="4572">
+    <dependentAssembly dependencyType="install" codebase="Desktop Notes.exe.manifest" size="4951">
       <assemblyIdentity name="Desktop Notes.exe" version="1.1.0.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>dX8z3/sDi+djn4iTutorpsYIDjM=</dsig:DigestValue>
+        <dsig:DigestValue>ad3y9q5ftPq+QPWmlt9g8g4qbvg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -7,41 +7,38 @@ namespace Desktop_Notes
     {
         public Point Location { get; set; }
         public Size FormSize { get; set; }
-        public string data { get; set; }
-        public Font font { get; set; }
+        public string data { get; set; } 
         public int theme { get; set; }
         public double opacity { get; set; }
-        public string title { get;set;}
+        public string title { get; set; }
         public bool hidden { get; set; }
         public bool topmost { get; set; }
         public Theme customTheme { get; set; }
         public DateTime creationTime { get; set; } 
+        public Style customStyle { get; set; }
+        public int currentStyle { get; set; }
 
         public FormData() { }
         public FormData(MainForm form)
         {
             Location = form.Location;
             FormSize = form.Size;
-            data = form.notebox1.Text;
-            font = form.notebox1.Font;
+            data = form.notebox1.Text; 
             theme = form.CurrentTheme;
             opacity = form.Opacity;
             hidden = !form.Visible;
             title = form.Title;
             topmost = form.TopMost;
-            customTheme = form.CustomTheme;            
+            customTheme = form.CustomTheme;
             creationTime = form.CreationTime;
+            customStyle = form.CustomStyle;
+            currentStyle = form.CurrentStyle;
         }
     }
 
     public class Theme
     {
-        public string Name { get; set; }
-        public Color TextColor { get; set; }
-        public Color BackColor { get; set; }
-        public Color TopBarColor { get; set; }
-
-        public Theme() { }
+        public Theme() { DefaultTheme(); }
         public Theme(string name, Color text, Color back, Color top)
         {
             Name = name;
@@ -50,14 +47,47 @@ namespace Desktop_Notes
             TopBarColor = top;
         }
 
-        public static Theme DefaultTheme()
+        public string Name { get; set; }
+        public Color TextColor { get; set; }
+        public Color BackColor { get; set; }
+        public Color TopBarColor { get; set; }
+
+        private void DefaultTheme()
         {
-            Theme th = new Theme();
-            th.Name = "Default";
-            th.TextColor = Color.Black;
-            th.BackColor = Color.FromArgb(255, 255, 200);
-            th.TopBarColor = Color.FromArgb(245, 240, 180);
-            return th;
+            Name = "Default";
+            TextColor = Color.Black;
+            BackColor = Color.FromArgb(255, 255, 200);
+            TopBarColor = Color.FromArgb(245, 240, 180);
         }
-    }        
-} 
+    }
+
+    public class Style
+    {
+        public Style() { DefaultStyle(); }
+        public Style(string name, string family, float size, string top)
+        {
+            Name = name;
+            FontFamily = family;
+            FontSize = size;
+            FStyle = FontStyle.Bold;
+        }
+
+        public string Name { get; set; }
+        public string FontFamily { get; set; }
+        public float FontSize { get; set; }
+        public FontStyle FStyle { get; set; }
+
+        public Font GetFont()
+        {
+            return new Font(FontFamily, FontSize, FStyle);
+        }
+
+        private void DefaultStyle()
+        {
+            Name = "Default";
+            FontFamily = "Segoe Print";
+            FontSize = 11.0F;
+            FStyle = FontStyle.Regular;
+        }
+    }
+}

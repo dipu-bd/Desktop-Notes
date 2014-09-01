@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Desktop Notes.exe" size="966144">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Desktop Notes.exe" size="971264">
       <assemblyIdentity name="Desktop Notes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>a7gw9dnsZ51cGYQfUn/OVNeUca4=</dsig:DigestValue>
+        <dsig:DigestValue>Me69GVggFo5QZfEy10l+48qP3/8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -82,6 +82,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>u2eFQYutAtDYiJ3vQndzQV38HDs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\Themes.txt" size="449">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>AF4wBPy305vvN2/8dPBo6Jz7WNE=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

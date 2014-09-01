@@ -14,7 +14,17 @@ namespace Desktop_Notes
             InitializeComponent();
 
             load_themes();
+            load_styles();
             this.form = form;
+            load_settings();
+        }
+
+        void load_defaults()
+        {
+            MainForm def = new MainForm(0);
+            form.CurrentTheme = def.CurrentTheme;
+            form.CurrentStyle = def.CurrentStyle;
+            form.Opacity = def.Opacity;
             load_settings();
         }
 
@@ -28,24 +38,31 @@ namespace Desktop_Notes
             }
 
             theme_sel.Items.Clear();
-            theme_sel.Items.AddRange(items.ToArray());
+            theme_sel.Items.AddRange(items.ToArray()); 
+        }
+        void load_styles()
+        {
+            List<string> items = new List<string>();
+            for (int i = 0; i < Program.Styles.Count; ++i)
+            {
+                items.Add(string.Format("{0} : {1}",
+                    i + 1, Program.Styles[i].Name));
+            }
 
-            theme_sel.SelectedIndex = 0;
+            style_sel.Items.Clear();
+            style_sel.Items.AddRange(items.ToArray()); 
         }
 
         void load_settings()
         {
-            load_theme();
-
-            current_font.Font = form.notebox1.Font;
-            current_font.Text = form.notebox1.Font.FontFamily.Name;
-            font_size.Value = (decimal)(form.notebox1.Font.Size);
-
+            settheme();
+            setstyle();
             opacity_val.Value = (decimal)form.Opacity;
             theme_sel.SelectedIndex = form.CurrentTheme;
+            style_sel.SelectedIndex = form.CurrentStyle;
         }
 
-        void load_theme()
+        void settheme()
         {
             Theme th = Program.Themes[form.CurrentTheme];
             if (th.Name == "Custom") th = form.CustomTheme;
@@ -53,14 +70,13 @@ namespace Desktop_Notes
             back_color.BackColor = th.BackColor;
             text_color.BackColor = th.TextColor;
         }
-
-        void load_defaults()
+        void setstyle()
         {
-            MainForm def = new MainForm(0);
-            form.CurrentTheme = def.CurrentTheme;
-            form.notebox1.Font = def.notebox1.Font;
-            form.Opacity = def.Opacity;
-            load_settings();
+            Style th = Program.Styles[form.CurrentStyle];
+            if (th.Name == "Custom") th = form.CustomStyle;
+            current_font.Font = th.GetFont();
+            current_font.Text = th.FontFamily;
+            font_size.Value = (decimal)th.FontSize;
         }
 
         private void default_Click(object sender, LinkLabelLinkClickedEventArgs e)
@@ -80,31 +96,60 @@ namespace Desktop_Notes
             try
             {
                 form.CurrentTheme = (int)theme_sel.SelectedIndex;
-                load_theme();
+                settheme();
             }
             catch { }
         }
-
-
+        private void style_sel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                form.CurrentStyle = (int)style_sel.SelectedIndex;
+                setstyle();
+            }
+            catch { }
+        }
+        
         //change values 
         private void current_font_Click(object sender, EventArgs e)
         {
             FontDialog fod = new FontDialog();
-            fod.Font = current_font.Font;
+            fod.Font = form.CustomStyle.GetFont();
             if (fod.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                current_font.Font = new Font(fod.Font.FontFamily, 11.0F);
-                current_font.Text = fod.Font.FontFamily.Name;
-                font_size.Value = (decimal)fod.Font.Size;
-                form.notebox1.Font = fod.Font;
+                form.CustomStyle.FontSize = fod.Font.Size;
+                form.CustomStyle.FontFamily = fod.Font.FontFamily.ToString();
+                form.CustomStyle.FStyle = fod.Font.Style;
+                if (style_sel.SelectedIndex != 0)
+                {
+                    style_sel.SelectedIndex = 0;
+                }
+                else
+                {
+                    form.ReloadStyle();
+                    form.Save();
+                    setstyle();
+                }
             }
         }
 
         private void font_size_ValueChanged(object sender, EventArgs e)
         {
-            if (current_font.Font.Size == (float)font_size.Value) return;
-            current_font.Font = new Font(current_font.Font.FontFamily, (float)font_size.Value);
-            form.notebox1.Font = current_font.Font;
+            Style th = Program.Styles[form.CurrentStyle];
+            if (th.Name == "Custom") th = form.CustomStyle;
+            if (th.FontSize == (float)font_size.Value) return;
+
+            form.CustomStyle.FontSize = (float)font_size.Value;
+            if (style_sel.SelectedIndex != 0)
+            {
+                style_sel.SelectedIndex = 0;
+            }
+            else
+            {
+                form.ReloadStyle();
+                form.Save();
+                setstyle();
+            }
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -136,7 +181,7 @@ namespace Desktop_Notes
                 {
                     form.ReloadTheme();
                     form.Save();
-                    load_theme();
+                    settheme();
                 }
             }
         }
@@ -156,7 +201,7 @@ namespace Desktop_Notes
                 {
                     form.ReloadTheme();
                     form.Save();
-                    load_theme();
+                    settheme();
                 }
             }
         }
@@ -176,10 +221,11 @@ namespace Desktop_Notes
                 {
                     form.ReloadTheme();
                     form.Save();
-                    load_theme();
+                    settheme();
                 }
             }           
         }
+
 
     }
 }

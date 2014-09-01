@@ -19,17 +19,22 @@ namespace Desktop_Notes
             EmptySlots = new Queue<int>();
             Themes = new List<Theme>();
             LoadThemes();
+            Styles = new List<Style>();
+            LoadStyles();
             components = new Component1();
             components.SetIconVisible();
-            ShowAllNotes();
+            LoadAllNotes();
 
             Application.Run();
             if (REGISTRY.FirstRun) REGISTRY.StartWithWindows = true;
         }
 
+        #region StartUp Loaders
+
         public static int CUR_ID = 1;
         public static Queue<int> EmptySlots;
         public static List<Theme> Themes;
+        public static List<Style> Styles;
         public static Component1 components;
         public static event EventHandler newNoteAddedEvent;
 
@@ -55,6 +60,29 @@ namespace Desktop_Notes
             }
         }
 
+        public static void LoadStyles()
+        {
+            List<List<string>> dat =
+                Newtonsoft.Json.JsonConvert.DeserializeObject<List<List<string>>>
+                (Desktop_Notes.Properties.Resources.Styles);
+
+            foreach (List<string> d in dat)
+            {
+                Style th = new Style();
+                th.Name = d[0];
+
+                th.FontFamily = d[1];
+                th.FontSize = float.Parse(d[2]);
+                th.FStyle = (FontStyle)int.Parse(d[3]);
+
+                Styles.Add(th);
+            }
+        }
+
+        #endregion
+
+        #region Add New, Show all, SaveOnExit
+
         public static void AddNewNote(FormData dat = null)
         {
             int id = CUR_ID;
@@ -64,7 +92,7 @@ namespace Desktop_Notes
             if (newNoteAddedEvent != null) newNoteAddedEvent(null, EventArgs.Empty);
         }
 
-        public static void ShowAllNotes()
+        public static void LoadAllNotes()
         {
             List<FormData> data = new List<FormData>();
             foreach (string id in REGISTRY.OPENED_NOTES)
@@ -73,18 +101,26 @@ namespace Desktop_Notes
                 if (val != null) data.Add((FormData)val);
             }
 
-            REGISTRY.DeleteAll();
+            CUR_ID = 1;
             foreach (FormData dat in data) AddNewNote(dat);
             if (CUR_ID == 1) AddNewNote();
+
+            REGISTRY.DeleteAll();
+            SaveAllNotes();
         }
 
-        public static void SaveAllOnExit()
+        public static void SaveAllNotes()
         {
             foreach (Form f in Application.OpenForms)
             {
-                if (f.GetType() != typeof(MainForm)) continue;
-                ((MainForm)f).Save();
+                if (f.GetType() == typeof(MainForm))
+                {
+                    ((MainForm)f).Save();
+                }
             }
         }
+
+        #endregion
+
     }
 }
