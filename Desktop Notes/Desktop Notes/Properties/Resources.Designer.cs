@@ -153,6 +153,10 @@ namespace Desktop_Notes.Properties {
         /// <summary>
         ///   Looks up a localized string similar to [
         ///	[
+        ///		&quot;Custom&quot;, 
+        ///		&quot;[[0, 0, 0], [255, 255, 200], [245, 240, 180]]&quot;
+        ///	],
+        ///	[
         ///		&quot;Default&quot;, 
         ///		&quot;[[0, 0, 0], [255, 255, 200], [245, 240, 180]]&quot;
         ///	], 

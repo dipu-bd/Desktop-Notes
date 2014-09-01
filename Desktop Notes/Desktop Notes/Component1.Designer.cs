@@ -39,10 +39,10 @@
             this.hideall_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.noteManager_form = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.start_windows = new System.Windows.Forms.ToolStripMenuItem();
             this.help_menu = new System.Windows.Forms.ToolStripMenuItem();
-            this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.start_windows = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.exit_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.context1.SuspendLayout();
             // 
             // notifyIcon1
@@ -70,7 +70,7 @@
             this.toolStripSeparator4,
             this.exit_menu});
             this.context1.Name = "contextMenuStrip1";
-            this.context1.Size = new System.Drawing.Size(182, 160);
+            this.context1.Size = new System.Drawing.Size(182, 182);
             this.context1.Opening += new System.ComponentModel.CancelEventHandler(this.context1_Opening);
             // 
             // toolStripSeparator3
@@ -104,6 +104,7 @@
             // 
             // noteManager_form
             // 
+            this.noteManager_form.Image = global::Desktop_Notes.Properties.Resources.settings;
             this.noteManager_form.Name = "noteManager_form";
             this.noteManager_form.Size = new System.Drawing.Size(181, 22);
             this.noteManager_form.Text = "Note Manager";
@@ -113,6 +114,12 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
             // 
+            // help_menu
+            // 
+            this.help_menu.Name = "help_menu";
+            this.help_menu.Size = new System.Drawing.Size(181, 22);
+            this.help_menu.Text = "About";
+            // 
             // start_windows
             // 
             this.start_windows.CheckOnClick = true;
@@ -120,22 +127,16 @@
             this.start_windows.Size = new System.Drawing.Size(181, 22);
             this.start_windows.Text = "Open with Windows";
             // 
-            // help_menu
+            // toolStripSeparator4
             // 
-            this.help_menu.Name = "help_menu";
-            this.help_menu.Size = new System.Drawing.Size(181, 22);
-            this.help_menu.Text = "About";
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(178, 6);
             // 
             // exit_menu
             // 
             this.exit_menu.Name = "exit_menu";
             this.exit_menu.Size = new System.Drawing.Size(181, 22);
             this.exit_menu.Text = "Exit";
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(178, 6);
             this.context1.ResumeLayout(false);
 
         }

@@ -8,7 +8,7 @@ namespace Desktop_Notes
     public partial class MainForm : Form
     {
         public MainForm(int id, FormData dat = null)
-        {            
+        {
             FORM_ID = id;
             InitializeComponent();
             CustomTheme = new Theme();
@@ -19,6 +19,7 @@ namespace Desktop_Notes
             this.StartPosition = FormStartPosition.Manual;
 
             LoadData(dat);
+            this.DateTimeLabel.Text = CreationTime.ToString();
         }
 
         private void LoadData(FormData dat = null)
@@ -34,13 +35,17 @@ namespace Desktop_Notes
             {
                 int seed = (int)DateTime.Now.Ticks & ((1 << 25) - 1);
                 Random rand = new Random(seed);
-                CurrentTheme = rand.Next(Program.Themes.Count);
+                CurrentTheme = rand.Next(Program.Themes.Count - 1) + 1;
             }
-            this.Show();
-            
+            CreationTime = DateTime.Now;
+
+            if (dat == null)
+            {
+                this.Show(); 
+                return;
+            }
+
             //load others
-            if (dat == null) return;
-            if (dat.hidden) this.Hide();
             this.SuspendLayout();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = dat.Location;
@@ -49,14 +54,19 @@ namespace Desktop_Notes
             this.notebox1.Text = dat.data;
             this.Opacity = dat.opacity;
             this.Title = dat.title;
-            if (dat.customTheme != null) this.CustomTheme = dat.customTheme;
+            if (dat.customTheme != null) { this.CustomTheme = dat.customTheme; }
+            if (dat.creationTime > new DateTime(2014, 1, 1)) { this.CreationTime = dat.creationTime; }
             this.CurrentTheme = dat.theme;
             this.ResumeLayout(true);
+            
+            this.Show();
+            if (dat.hidden) this.Hide();
         }
 
         //
         // Properties and Variables
         //
+        public DateTime CreationTime { get; set; }
         public int FORM_ID { get; set; }
         public string Title
         {
@@ -91,10 +101,12 @@ namespace Desktop_Notes
             this.addButton.BackColor = th.TopBarColor;
             this.deleteButton.BackColor = th.TopBarColor;
             this.hideButton.BackColor = th.TopBarColor;
+            this.bottomPanel.BackColor = th.TopBarColor;
+            this.BackColor = th.BackColor;
         }
 
         public Theme CustomTheme { get; set; }
-        
+
         //
         //Drag form using Topbar
         //
@@ -177,6 +189,7 @@ namespace Desktop_Notes
         }
         private void hideNote_Click(object sender, EventArgs e)
         {
+            notebox1.Focus();
             this.Hide();
         }
 
@@ -200,7 +213,11 @@ namespace Desktop_Notes
         private void settings_Click(object sender, EventArgs e)
         {
             SettingForm setting = new SettingForm(this);
-            setting.ShowDialog();
+            setting.ShowDialog(this);
+        }
+        private void SettingsLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            settings_Click(null, EventArgs.Empty);
         }
 
 
@@ -219,7 +236,7 @@ namespace Desktop_Notes
             sureDialog.Visible = false;
             this.TopMost = false;
         }
-        
+
         //
         // Button Style
         //
@@ -252,5 +269,6 @@ namespace Desktop_Notes
         {
             deleteButton.Image = Properties.Resources.delete_gray;
         }
+
     }
 }

@@ -1,1 +1,0 @@
-Desktop Notes is an easy to use note keeping software. You can keep your mind free by letting it take care of your ideas or small texts to remember.

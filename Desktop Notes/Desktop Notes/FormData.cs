@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System;
 
 namespace Desktop_Notes
 {
@@ -14,6 +15,7 @@ namespace Desktop_Notes
         public bool hidden { get; set; }
         public bool topmost { get; set; }
         public Theme customTheme { get; set; }
+        public DateTime creationTime { get; set; } 
 
         public FormData() { }
         public FormData(MainForm form)
@@ -27,7 +29,8 @@ namespace Desktop_Notes
             hidden = !form.Visible;
             title = form.Title;
             topmost = form.TopMost;
-            customTheme = form.CustomTheme;
+            customTheme = form.CustomTheme;            
+            creationTime = form.CreationTime;
         }
     }
 

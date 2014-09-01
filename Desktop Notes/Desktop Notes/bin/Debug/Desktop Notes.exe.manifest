@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Desktop Notes.exe" size="967168">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Desktop Notes.exe" size="966144">
       <assemblyIdentity name="Desktop Notes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>0fQ7p5kVAX2qQpjWZfZKQxEPt08=</dsig:DigestValue>
+        <dsig:DigestValue>a7gw9dnsZ51cGYQfUn/OVNeUca4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -78,7 +78,7 @@ namespace Desktop_Notes
         void help_menu_Click(object sender, EventArgs e)
         {
             HelpForm hp = new HelpForm();
-            hp.ShowDialog();
+            hp.Show();
         }
 
         void exit_menu_Click(object sender, System.EventArgs e)

@@ -63,7 +63,7 @@ namespace Desktop_Notes
             load_settings();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void default_Click(object sender, LinkLabelLinkClickedEventArgs e)
         {
             load_defaults();
         }
@@ -93,7 +93,7 @@ namespace Desktop_Notes
             fod.Font = current_font.Font;
             if (fod.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                current_font.Font = new Font(fod.Font.FontFamily, 12.0F);
+                current_font.Font = new Font(fod.Font.FontFamily, 11.0F);
                 current_font.Text = fod.Font.FontFamily.Name;
                 font_size.Value = (decimal)fod.Font.Size;
                 form.notebox1.Font = fod.Font;
@@ -180,5 +180,6 @@ namespace Desktop_Notes
                 }
             }           
         }
+
     }
 }
