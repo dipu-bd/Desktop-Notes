@@ -101,7 +101,7 @@ namespace Desktop_Notes
                 context1.Items.Insert(0, menu);
                 if (f.Visible)
                 {
-                    menu.Image = Properties.Resources.hide;
+                    menu.Image = null;
                 }
                 else
                 {
@@ -117,7 +117,8 @@ namespace Desktop_Notes
             {
                 ToolStripMenuItem menu = (ToolStripMenuItem)sender;
                 MainForm f = (MainForm)menu.Tag;
-                f.Visible = !f.Visible;
+                if (!f.Visible) f.Visible = true;
+                else f.BringToFront();
                 context1.Items.Remove(menu);
             }
             catch { }
@@ -139,7 +140,7 @@ namespace Desktop_Notes
         {
             if (e.Button == MouseButtons.Left)
             {
-                showall_menu.PerformClick();
+                noteManager_form_Click(null, EventArgs.Empty);                
             }
         }
 
