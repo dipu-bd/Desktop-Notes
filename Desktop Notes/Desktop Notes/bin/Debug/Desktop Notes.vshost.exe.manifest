@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="Desktop Notes.exe" version="1.1.0.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="Desktop Notes.exe" version="1.1.0.7" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="main.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Desktop Notes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Desktop Notes" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="Desktop Notes.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,36 +43,36 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Desktop Notes.exe" size="971264">
-      <assemblyIdentity name="Desktop Notes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Desktop Notes.exe" size="972800">
+      <assemblyIdentity name="Desktop Notes" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>S4fgUpjmG+t61h+ly3EWE5wZf1U=</dsig:DigestValue>
+        <dsig:DigestValue>UFJphuLukKYoQai0sfqi6SWfBjQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="488448">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="501760">
       <assemblyIdentity name="Newtonsoft.Json" version="6.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>7DziJXRKB62aL7GncFMYCEqt4to=</dsig:DigestValue>
+        <dsig:DigestValue>u/ehQEFb/arh9XsJcZd9Nyr3dvs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Desktop Notes.exe.config" size="122">
+  <file name="Desktop Notes.exe.config" size="289">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>9KA+JzlusaPz4TXe3oyukw98w6U=</dsig:DigestValue>
+      <dsig:DigestValue>rgDiW6zbXAqWEv1TwjzXPUFfq/w=</dsig:DigestValue>
     </hash>
   </file>
   <file name="main.ico" size="173111">
@@ -82,15 +82,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>u2eFQYutAtDYiJ3vQndzQV38HDs=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Resources\Themes.txt" size="449">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>AF4wBPy305vvN2/8dPBo6Jz7WNE=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

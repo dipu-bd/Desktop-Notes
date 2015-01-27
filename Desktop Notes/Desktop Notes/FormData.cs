@@ -23,7 +23,7 @@ namespace Desktop_Notes
         {
             Location = form.Location;
             FormSize = form.Size;
-            data = form.notebox1.Text; 
+            data = form.notebox1.Rtf; 
             theme = form.CurrentTheme;
             opacity = form.Opacity;
             hidden = !form.Visible;

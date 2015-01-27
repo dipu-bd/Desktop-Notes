@@ -31,15 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.stayOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.styleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.styleContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.styleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themeContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.themeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.newNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -48,8 +46,16 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notebox1 = new System.Windows.Forms.RichTextBox();
-            this.TopBar = new System.Windows.Forms.TableLayoutPanel();
-            this.titlebar = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.sureDialog = new System.Windows.Forms.Panel();
             this.noButton = new System.Windows.Forms.Button();
             this.yesButton = new System.Windows.Forms.Button();
@@ -57,22 +63,21 @@
             this.bottomPanel = new System.Windows.Forms.TableLayoutPanel();
             this.DateTimeLabel = new System.Windows.Forms.Label();
             this.SettingsLabel = new System.Windows.Forms.LinkLabel();
-            this.addButton = new System.Windows.Forms.CustomButton();
-            this.hideButton = new System.Windows.Forms.CustomButton();
-            this.deleteButton = new System.Windows.Forms.CustomButton();
+            this.TopBar = new System.Windows.Forms.TableLayoutPanel();
+            this.hideNote = new System.Windows.Forms.Button();
+            this.addNote = new System.Windows.Forms.Button();
+            this.deleteNote = new System.Windows.Forms.Button();
+            this.titlebar = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
-            this.TopBar.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.sureDialog.SuspendLayout();
             this.bottomPanel.SuspendLayout();
+            this.TopBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cutToolStripMenuItem,
-            this.copyToolStripMenuItem,
-            this.pasteToolStripMenuItem,
-            this.toolStripSeparator1,
             this.stayOnTopToolStripMenuItem,
             this.styleToolStripMenuItem,
             this.themeToolStripMenuItem,
@@ -84,34 +89,8 @@
             this.toolStripSeparator4,
             this.settingsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 248);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 176);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // cutToolStripMenuItem
-            // 
-            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.cutToolStripMenuItem.Text = "Cut";
-            this.cutToolStripMenuItem.Click += new System.EventHandler(this.cut_Click);
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copy_Click);
-            // 
-            // pasteToolStripMenuItem
-            // 
-            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.pasteToolStripMenuItem.Text = "Paste";
-            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.paste_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
             // 
             // stayOnTopToolStripMenuItem
             // 
@@ -134,6 +113,13 @@
             this.styleContext.Size = new System.Drawing.Size(61, 4);
             this.styleContext.Opening += new System.ComponentModel.CancelEventHandler(this.styleContext_Opening);
             // 
+            // styleToolStripMenuItem1
+            // 
+            this.styleToolStripMenuItem1.DropDown = this.styleContext;
+            this.styleToolStripMenuItem1.Name = "styleToolStripMenuItem1";
+            this.styleToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+            this.styleToolStripMenuItem1.Text = "Style";
+            // 
             // themeToolStripMenuItem
             // 
             this.themeToolStripMenuItem.DropDown = this.themeContext;
@@ -147,6 +133,13 @@
             this.themeContext.OwnerItem = this.themeToolStripMenuItem;
             this.themeContext.Size = new System.Drawing.Size(61, 4);
             this.themeContext.Opening += new System.ComponentModel.CancelEventHandler(this.themeContext_Opening);
+            // 
+            // themeToolStripMenuItem1
+            // 
+            this.themeToolStripMenuItem1.DropDown = this.themeContext;
+            this.themeToolStripMenuItem1.Name = "themeToolStripMenuItem1";
+            this.themeToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+            this.themeToolStripMenuItem1.Text = "Theme";
             // 
             // toolStripSeparator2
             // 
@@ -201,55 +194,92 @@
             this.notebox1.AutoWordSelection = true;
             this.notebox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(200)))));
             this.notebox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.notebox1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notebox1.ContextMenuStrip = this.contextMenuStrip2;
             this.notebox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.notebox1.EnableAutoDragDrop = true;
             this.notebox1.ForeColor = System.Drawing.Color.Black;
-            this.notebox1.Location = new System.Drawing.Point(0, 27);
+            this.notebox1.Location = new System.Drawing.Point(0, 26);
             this.notebox1.Name = "notebox1";
             this.notebox1.ShowSelectionMargin = true;
-            this.notebox1.Size = new System.Drawing.Size(204, 221);
+            this.notebox1.Size = new System.Drawing.Size(204, 222);
             this.notebox1.TabIndex = 1;
             this.notebox1.Text = "";
             this.notebox1.TextChanged += new System.EventHandler(this.property_Changed);
             // 
-            // TopBar
+            // contextMenuStrip2
             // 
-            this.TopBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(180)))));
-            this.TopBar.ColumnCount = 4;
-            this.TopBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.TopBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TopBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.TopBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.TopBar.Controls.Add(this.addButton, 0, 0);
-            this.TopBar.Controls.Add(this.hideButton, 2, 0);
-            this.TopBar.Controls.Add(this.deleteButton, 3, 0);
-            this.TopBar.Controls.Add(this.titlebar, 1, 0);
-            this.TopBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopBar.Location = new System.Drawing.Point(0, 0);
-            this.TopBar.Name = "TopBar";
-            this.TopBar.RowCount = 1;
-            this.TopBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TopBar.Size = new System.Drawing.Size(204, 27);
-            this.TopBar.TabIndex = 0;
-            this.TopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopBar_MouseDown);
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cutToolStripMenuItem,
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.openFileToolStripMenuItem,
+            this.saveToFileToolStripMenuItem,
+            this.toolStripSeparator8,
+            this.styleToolStripMenuItem1,
+            this.themeToolStripMenuItem1,
+            this.toolStripSeparator7,
+            this.settingsToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(132, 198);
             // 
-            // titlebar
+            // cutToolStripMenuItem
             // 
-            this.titlebar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.titlebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(180)))));
-            this.titlebar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.titlebar.ContextMenuStrip = this.contextMenuStrip1;
-            this.titlebar.Cursor = System.Windows.Forms.Cursors.Default;
-            this.titlebar.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F);
-            this.titlebar.ForeColor = System.Drawing.Color.Black;
-            this.titlebar.Location = new System.Drawing.Point(28, 5);
-            this.titlebar.Name = "titlebar";
-            this.titlebar.Size = new System.Drawing.Size(123, 17);
-            this.titlebar.TabIndex = 0;
-            this.titlebar.TabStop = false;
-            this.titlebar.TextChanged += new System.EventHandler(this.property_Changed);
-            this.titlebar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopBar_MouseDown);
+            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.cutToolStripMenuItem.Text = "Cut";
+            this.cutToolStripMenuItem.Click += new System.EventHandler(this.cut_Click);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copy_Click);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.paste_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(128, 6);
+            // 
+            // openFileToolStripMenuItem
+            // 
+            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.openFileToolStripMenuItem.Text = "Open file";
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+            // 
+            // saveToFileToolStripMenuItem
+            // 
+            this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
+            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.saveToFileToolStripMenuItem.Text = "Save to file";
+            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.saveToFileToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(128, 6);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(128, 6);
+            // 
+            // settingsToolStripMenuItem1
+            // 
+            this.settingsToolStripMenuItem1.Image = global::Desktop_Notes.Properties.Resources.settings;
+            this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+            this.settingsToolStripMenuItem1.Text = "Settings";
+            this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.settings_Click);
             // 
             // sureDialog
             // 
@@ -340,61 +370,101 @@
             this.SettingsLabel.Text = "Settings";
             this.SettingsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SettingsLabel_LinkClicked);
             // 
-            // addButton
+            // TopBar
             // 
-            this.addButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addButton.Image = global::Desktop_Notes.Properties.Resources.add_gray;
-            this.addButton.Location = new System.Drawing.Point(0, 1);
-            this.addButton.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(25, 25);
-            this.addButton.TabIndex = 1;
-            this.addButton.TabStop = false;
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addNote_Click);
-            this.addButton.Enter += new System.EventHandler(this.addButton_Enter);
-            this.addButton.Leave += new System.EventHandler(this.addButton_Leave);
-            this.addButton.MouseEnter += new System.EventHandler(this.addButton_Enter);
-            this.addButton.MouseLeave += new System.EventHandler(this.addButton_Leave);
+            this.TopBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(180)))));
+            this.TopBar.ColumnCount = 4;
+            this.TopBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.TopBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TopBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.TopBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.TopBar.Controls.Add(this.hideNote, 2, 0);
+            this.TopBar.Controls.Add(this.addNote, 0, 0);
+            this.TopBar.Controls.Add(this.deleteNote, 3, 0);
+            this.TopBar.Controls.Add(this.titlebar, 1, 0);
+            this.TopBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TopBar.Location = new System.Drawing.Point(0, 0);
+            this.TopBar.Name = "TopBar";
+            this.TopBar.RowCount = 1;
+            this.TopBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TopBar.Size = new System.Drawing.Size(204, 26);
+            this.TopBar.TabIndex = 6;
+            this.TopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopBar_MouseDown);
             // 
-            // hideButton
+            // hideNote
             // 
-            this.hideButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hideButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.hideButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.hideButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hideButton.Image = global::Desktop_Notes.Properties.Resources.hide_gray;
-            this.hideButton.Location = new System.Drawing.Point(154, 1);
-            this.hideButton.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.hideButton.Name = "hideButton";
-            this.hideButton.Size = new System.Drawing.Size(25, 25);
-            this.hideButton.TabIndex = 2;
-            this.hideButton.TabStop = false;
-            this.hideButton.UseVisualStyleBackColor = false;
-            this.hideButton.Click += new System.EventHandler(this.hideNote_Click);
-            this.hideButton.Enter += new System.EventHandler(this.hideButton_Enter);
-            this.hideButton.Leave += new System.EventHandler(this.hideButton_Leave);
-            this.hideButton.MouseEnter += new System.EventHandler(this.hideButton_Enter);
-            this.hideButton.MouseLeave += new System.EventHandler(this.hideButton_Leave);
+            this.hideNote.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hideNote.FlatAppearance.BorderSize = 0;
+            this.hideNote.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Azure;
+            this.hideNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cornsilk;
+            this.hideNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hideNote.Image = global::Desktop_Notes.Properties.Resources.hide_gray;
+            this.hideNote.Location = new System.Drawing.Point(149, 1);
+            this.hideNote.Margin = new System.Windows.Forms.Padding(1);
+            this.hideNote.Name = "hideNote";
+            this.hideNote.Size = new System.Drawing.Size(26, 24);
+            this.hideNote.TabIndex = 2;
+            this.hideNote.UseVisualStyleBackColor = true;
+            this.hideNote.Click += new System.EventHandler(this.hideNote_Click);
+            this.hideNote.Enter += new System.EventHandler(this.hideButton_Enter);
+            this.hideNote.Leave += new System.EventHandler(this.hideButton_Leave);
+            this.hideNote.MouseEnter += new System.EventHandler(this.hideButton_Enter);
+            this.hideNote.MouseLeave += new System.EventHandler(this.hideButton_Leave);
             // 
-            // deleteButton
+            // addNote
             // 
-            this.deleteButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteButton.Image = global::Desktop_Notes.Properties.Resources.delete_gray;
-            this.deleteButton.Location = new System.Drawing.Point(179, 1);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(25, 25);
-            this.deleteButton.TabIndex = 3;
-            this.deleteButton.TabStop = false;
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteNote_Click);
-            this.deleteButton.Enter += new System.EventHandler(this.deleteButton_Enter);
-            this.deleteButton.Leave += new System.EventHandler(this.deleteButton_Leave);
-            this.deleteButton.MouseEnter += new System.EventHandler(this.deleteButton_Enter);
-            this.deleteButton.MouseLeave += new System.EventHandler(this.deleteButton_Leave);
+            this.addNote.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addNote.FlatAppearance.BorderSize = 0;
+            this.addNote.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Azure;
+            this.addNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cornsilk;
+            this.addNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addNote.Image = global::Desktop_Notes.Properties.Resources.add_gray;
+            this.addNote.Location = new System.Drawing.Point(1, 1);
+            this.addNote.Margin = new System.Windows.Forms.Padding(1);
+            this.addNote.Name = "addNote";
+            this.addNote.Size = new System.Drawing.Size(26, 24);
+            this.addNote.TabIndex = 0;
+            this.addNote.UseVisualStyleBackColor = true;
+            this.addNote.Click += new System.EventHandler(this.addNote_Click);
+            this.addNote.Enter += new System.EventHandler(this.addButton_Enter);
+            this.addNote.Leave += new System.EventHandler(this.addButton_Leave);
+            this.addNote.MouseEnter += new System.EventHandler(this.addButton_Enter);
+            this.addNote.MouseLeave += new System.EventHandler(this.addButton_Leave);
+            // 
+            // deleteNote
+            // 
+            this.deleteNote.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deleteNote.FlatAppearance.BorderSize = 0;
+            this.deleteNote.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Azure;
+            this.deleteNote.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cornsilk;
+            this.deleteNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteNote.Image = global::Desktop_Notes.Properties.Resources.delete_gray;
+            this.deleteNote.Location = new System.Drawing.Point(177, 1);
+            this.deleteNote.Margin = new System.Windows.Forms.Padding(1);
+            this.deleteNote.Name = "deleteNote";
+            this.deleteNote.Size = new System.Drawing.Size(26, 24);
+            this.deleteNote.TabIndex = 1;
+            this.deleteNote.UseVisualStyleBackColor = true;
+            this.deleteNote.Click += new System.EventHandler(this.deleteNote_Click);
+            this.deleteNote.Enter += new System.EventHandler(this.deleteButton_Enter);
+            this.deleteNote.Leave += new System.EventHandler(this.deleteButton_Leave);
+            this.deleteNote.MouseEnter += new System.EventHandler(this.deleteButton_Enter);
+            this.deleteNote.MouseLeave += new System.EventHandler(this.deleteButton_Leave);
+            // 
+            // titlebar
+            // 
+            this.titlebar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.titlebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(180)))));
+            this.titlebar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.titlebar.ContextMenuStrip = this.contextMenuStrip1;
+            this.titlebar.Cursor = System.Windows.Forms.Cursors.Default;
+            this.titlebar.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titlebar.Location = new System.Drawing.Point(31, 4);
+            this.titlebar.Name = "titlebar";
+            this.titlebar.Size = new System.Drawing.Size(114, 18);
+            this.titlebar.TabIndex = 3;
+            this.titlebar.TextChanged += new System.EventHandler(this.property_Changed);
+            this.titlebar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopBar_MouseDown);
             // 
             // MainForm
             // 
@@ -403,10 +473,10 @@
             this.BackColor = System.Drawing.Color.Cornsilk;
             this.ClientSize = new System.Drawing.Size(204, 264);
             this.ControlBox = false;
-            this.Controls.Add(this.sureDialog);
             this.Controls.Add(this.notebox1);
-            this.Controls.Add(this.TopBar);
+            this.Controls.Add(this.sureDialog);
             this.Controls.Add(this.bottomPanel);
+            this.Controls.Add(this.TopBar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
@@ -420,10 +490,11 @@
             this.SizeChanged += new System.EventHandler(this.property_Changed);
             this.VisibleChanged += new System.EventHandler(this.property_Changed);
             this.contextMenuStrip1.ResumeLayout(false);
-            this.TopBar.ResumeLayout(false);
-            this.TopBar.PerformLayout();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.sureDialog.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
+            this.TopBar.ResumeLayout(false);
+            this.TopBar.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -436,18 +507,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         public System.Windows.Forms.RichTextBox notebox1;
-        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem themeToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip themeContext;
         private System.Windows.Forms.ToolStripMenuItem hideNoteToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel TopBar;
-        private System.Windows.Forms.CustomButton addButton;
-        private System.Windows.Forms.CustomButton hideButton;
-        private System.Windows.Forms.CustomButton deleteButton;
-        private System.Windows.Forms.TextBox titlebar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Panel sureDialog;
         private System.Windows.Forms.Label label1;
@@ -460,6 +522,23 @@
         private System.Windows.Forms.ToolStripMenuItem styleToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip styleContext;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem themeToolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem styleToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.TableLayoutPanel TopBar;
+        private System.Windows.Forms.Button hideNote;
+        private System.Windows.Forms.Button addNote;
+        private System.Windows.Forms.Button deleteNote;
+        private System.Windows.Forms.TextBox titlebar;
 
     }
 }

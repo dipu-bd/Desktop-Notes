@@ -11,8 +11,9 @@ namespace Desktop_Notes
     {
         public MainForm(int id, FormData dat = null)
         {
-            FORM_ID = id;
             InitializeComponent();
+
+            FORM_ID = id;
             CustomTheme = new Theme();
             CustomStyle = new Style();
 
@@ -63,8 +64,8 @@ namespace Desktop_Notes
             this.SuspendLayout();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = dat.Location;
-            this.Size = dat.FormSize; 
-            this.notebox1.Text = dat.data;
+            this.Size = dat.FormSize;
+            this.notebox1.Rtf = dat.data;
             this.Opacity = dat.opacity;
             this.Title = dat.title;
             if (dat.customTheme != null) { this.CustomTheme = dat.customTheme; }
@@ -119,7 +120,7 @@ namespace Desktop_Notes
                 if (value >= Program.Styles.Count)
                     value = Program.Styles.Count - 1;
                 if (value < 0) value = 0;
-                
+
                 if (_style != value)
                 {
                     _style = value;
@@ -137,9 +138,9 @@ namespace Desktop_Notes
             this.notebox1.ForeColor = th.TextColor;
             this.TopBar.BackColor = th.TopBarColor;
             this.titlebar.BackColor = th.TopBarColor;
-            this.addButton.BackColor = th.TopBarColor;
-            this.deleteButton.BackColor = th.TopBarColor;
-            this.hideButton.BackColor = th.TopBarColor;
+            this.addNote.BackColor = th.TopBarColor;
+            this.deleteNote.BackColor = th.TopBarColor;
+            this.hideNote.BackColor = th.TopBarColor;
             this.bottomPanel.BackColor = th.TopBarColor;
             this.BackColor = th.BackColor;
         }
@@ -155,9 +156,12 @@ namespace Desktop_Notes
         //
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
+        
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam); //use INT for 32bit and LONG for 64bit
 
         [DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, long Msg, long wParam, long lParam);
+        public static extern int SendMessage(IntPtr hWnd, long Msg, long wParam, long lParam); //use INT for 32bit and LONG for 64bit
         [DllImportAttribute("user32.dll")]
         public static extern int ReleaseCapture();
 
@@ -165,8 +169,8 @@ namespace Desktop_Notes
         {
             if (e.Button == MouseButtons.Left)
             {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+                ReleaseCapture();                                   
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);                
             }
         }
 
@@ -228,7 +232,7 @@ namespace Desktop_Notes
         //
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            bool edit = (sender == notebox1);
+            bool edit = (sender.Equals(notebox1));
             cutToolStripMenuItem.Visible = edit;
             copyToolStripMenuItem.Visible = edit;
             pasteToolStripMenuItem.Visible = edit;
@@ -237,7 +241,7 @@ namespace Desktop_Notes
         }
         private void themeContext_Opening(object sender, CancelEventArgs e)
         {
-            foreach(ToolStripMenuItem tmi in themeContext.Items)
+            foreach (ToolStripMenuItem tmi in themeContext.Items)
             {
                 tmi.Checked = ((int)tmi.Tag == CurrentTheme);
             }
@@ -249,7 +253,7 @@ namespace Desktop_Notes
             {
                 tmi.Checked = ((int)tmi.Tag == CurrentStyle);
             }
-        } 
+        }
 
         private void cut_Click(object sender, EventArgs e)
         {
@@ -318,34 +322,77 @@ namespace Desktop_Notes
         //
         private void addButton_Enter(object sender, EventArgs e)
         {
-            addButton.Image = Properties.Resources.add;
+            addNote.Image = Properties.Resources.add;
         }
 
         private void addButton_Leave(object sender, EventArgs e)
         {
-            addButton.Image = Properties.Resources.add_gray;
+            addNote.Image = Properties.Resources.add_gray;
         }
 
         private void hideButton_Enter(object sender, EventArgs e)
         {
-            hideButton.Image = Properties.Resources.hide;
+            hideNote.Image = Properties.Resources.hide;
         }
 
         private void hideButton_Leave(object sender, EventArgs e)
         {
-            hideButton.Image = Properties.Resources.hide_gray;
+            hideNote.Image = Properties.Resources.hide_gray;
         }
 
         private void deleteButton_Enter(object sender, EventArgs e)
         {
-            deleteButton.Image = Properties.Resources.delete;
+            deleteNote.Image = Properties.Resources.delete;
         }
 
         private void deleteButton_Leave(object sender, EventArgs e)
         {
-            deleteButton.Image = Properties.Resources.delete_gray;
+            deleteNote.Image = Properties.Resources.delete_gray;
         }
 
+        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "All Files | *.*";
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.Title = System.IO.Path.GetFileNameWithoutExtension(ofd.FileName);
+                    string ext = System.IO.Path.GetExtension(ofd.FileName);
+                    if(ext.ToLower() == ".rtf")
+                        this.notebox1.Rtf = System.IO.File.ReadAllText(ofd.FileName);
+                    else 
+                        this.notebox1.Text = System.IO.File.ReadAllText(ofd.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void saveToFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "All Files | *.*";
+                sfd.FileName = Title + ".rtf";
+                if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string ext = System.IO.Path.GetExtension(sfd.FileName);
+                    if (ext.ToLower() == ".rtf")
+                        this.notebox1.SaveFile(sfd.FileName);
+                    else                        
+                        System.IO.File.WriteAllText(sfd.FileName, notebox1.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
     }
 }
